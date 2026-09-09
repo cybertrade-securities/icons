@@ -7,12 +7,14 @@
   <meta name="description" content="CyberTrade Logo 配色图库：28 款设计与原版素材，包含纯色、渐变、SVG 和高清 PNG 下载。">
   <title>CyberTrade — Logo Gallery</title>
   <link rel="icon" href="assets/gradient/10-aurora.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
-  <script src="gallery.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20260909-2">
+  <script src="gallery.js?v=20260909-2" defer></script>
+  <script src="customizer.js?v=20260909-2" defer></script>
 </head>
 <body>
   <header class="topbar"><a class="brand" href="./"><img src="assets/cybertrade-wordmark.svg" alt="CyberTrade" width="164" height="48"><span> / BRAND ASSETS</span></a><a href="https://github.com/cybertrade-securities/icons">GitHub ↗</a></header>
   <main>
+    <a class="custom-jump" href="#customizer">自定义 Logo 配色 ↘</a>
     <section class="intro"><div><p class="eyebrow">THE COLOR COLLECTION / 001</p><h1>同一字形，<br><span>不同光谱。</span></h1><p class="description">28 款 CyberTrade Logo 与原版素材。探索纯色、极光与金属质感，找到属于你的配色。</p><a class="bundle" href="cybertrade-logos.zip" download>下载全部配色 <span aria-hidden="true">↓</span></a></div><a class="hero-art" href="#gallery"><img src="assets/gradient/10-aurora.svg" alt="极光青紫渐变 CyberTrade Logo" width="1024" height="1024"><span>10 / AURORA <span>探索配色 ↓</span></span></a></section>
     <section id="gallery" aria-label="Logo 配色图库"><div class="toolbar"><div class="filters" role="group" aria-label="配色分类"><button type="button" data-filter="all" aria-pressed="true">全部 <span>28</span></button><button type="button" data-filter="gradient" aria-pressed="false">渐变 <span>12</span></button><button type="button" data-filter="solid" aria-pressed="false">纯色 <span>9</span></button><button type="button" data-filter="original" aria-pressed="false">原版 <span>7</span></button></div><p id="count" aria-live="polite">28 款 / SVG · PNG</p></div><div class="grid">
       <article class="card" data-category="gradient">
@@ -156,6 +158,25 @@
         <div class="downloads"><a href="assets/original/cybertrade-yellow-black-1600.png" download>下载原图 PNG <span aria-hidden="true">↗</span></a></div>
       </article>
     </div></section>
+    <section id="customizer" class="customizer" aria-labelledby="customizer-title">
+      <div class="customizer-heading"><div><p class="eyebrow">MAKE IT YOURS</p><h2 id="customizer-title">手搓你的 CyberTrade</h2><p class="description">自由搭配背景与字色，拖动方向，实时查看渐变效果。</p></div><button id="custom-reset" type="button">重置配色</button></div>
+      <div class="customizer-layout"><div class="customizer-preview"><img id="custom-image" src="assets/gradient/10-aurora.svg" alt="自定义 CyberTrade Logo 实时预览" width="1024" height="1024"><p>原版字形 / 1024 × 1024</p></div>
+        <form id="custom-controls">
+          <fieldset><legend>背景</legend>
+            <label class="control-label" for="bg-mode">填充方式</label><select id="bg-mode"><option value="solid">纯色</option><option value="linear" selected>线性渐变</option><option value="radial">径向渐变</option></select>
+            <div class="color-pair"><label>起始颜色<input id="bg-start" type="color" value="#050c1c"><output id="bg-start-value" for="bg-start">#050c1c</output></label><label id="bg-end-control">结束颜色<input id="bg-end" type="color" value="#29205c"><output id="bg-end-value" for="bg-end">#29205c</output></label></div>
+            <label id="bg-angle-control" class="angle-control" for="bg-angle">方向 <output id="bg-angle-value" for="bg-angle">315°</output><input id="bg-angle" type="range" min="0" max="360" value="315"><span>0° 向右 · 90° 向下 · 180° 向左 · 270° 向上</span></label>
+          </fieldset>
+          <fieldset><legend>Logo 字色</legend>
+            <label class="control-label" for="fg-mode">填充方式</label><select id="fg-mode"><option value="solid">纯色</option><option value="linear" selected>线性渐变</option><option value="radial">径向渐变</option></select>
+            <div class="color-pair"><label>起始颜色<input id="fg-start" type="color" value="#69fff0"><output id="fg-start-value" for="fg-start">#69fff0</output></label><label id="fg-end-control">结束颜色<input id="fg-end" type="color" value="#b8a3ff"><output id="fg-end-value" for="fg-end">#b8a3ff</output></label></div>
+            <label id="fg-angle-control" class="angle-control" for="fg-angle">方向 <output id="fg-angle-value" for="fg-angle">0°</output><input id="fg-angle" type="range" min="0" max="360" value="0"><span>0° 向右 · 90° 向下 · 180° 向左 · 270° 向上</span></label>
+          </fieldset>
+          <div class="custom-actions"><button id="custom-svg" type="button" disabled>下载 SVG ↓</button><button id="custom-png" type="button" disabled>下载 PNG ↓</button></div>
+          <p id="custom-status" role="status">正在加载原版 Logo…</p>
+        </form>
+      </div>
+    </section>
   </main>
   <footer><span>CYBERTRADE / ORIGINAL WORDMARK</span><span>原始尺寸 PNG · 可缩放 SVG</span></footer>
   <dialog aria-labelledby="preview-title"><div class="dialog-top"><h2 id="preview-title"></h2><button type="button" class="close" aria-label="关闭预览">✕</button></div><img id="preview-image" alt="" width="1024" height="1024"><div class="dialog-links"><a id="preview-svg" download>下载 SVG ↗</a><a id="preview-png" download>下载 PNG ↗</a></div></dialog>

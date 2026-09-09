@@ -15,7 +15,10 @@ document.querySelectorAll(".preview").forEach((button) => {
     const { name, path, format = "svg" } = button.dataset;
     document.querySelector("#preview-title").textContent = name;
     const image = document.querySelector("#preview-image");
-    image.src = path + "." + format;
+    const thumbnail = button.querySelector("img");
+    image.src = thumbnail.src;
+    image.width = Number(thumbnail.getAttribute("width"));
+    image.height = Number(thumbnail.getAttribute("height"));
     image.alt = name + " CyberTrade Logo";
     const svgLink = document.querySelector("#preview-svg");
     svgLink.hidden = format !== "svg";
