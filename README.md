@@ -1,10 +1,12 @@
 # CyberTrade Icons
 
-21 square CyberTrade logo colorways, preserving the original wordmark.
+28 CyberTrade logo assets: 21 square colorways and 7 original images.
 
 - `assets/solid/`: 9 solid background and wordmark combinations.
+- `assets/cybertrade-wordmark.svg`: original Portal wordmark used in the gallery header.
 - `assets/gradient/`: 12 gradient editions with subtle glow and grid details.
-- Every edition includes a scalable SVG and a 1024 × 1024 PNG.
+- Each generated colorway includes a scalable SVG and a 1024 × 1024 PNG.
+- `assets/original/`: 7 existing repository PNGs, renamed by color and format without modifying image data. Includes cyan/black, magenta/black, blue-violet/black, blue-violet/white, yellow/black at 128 and 1600 pixels, and a 958 × 238 black-on-white wordmark.
 - `cybertrade-logos.zip`: all logo files and palette CSVs.
 - `index.html`: responsive gallery with category filters, enlarged previews, and downloads.
 

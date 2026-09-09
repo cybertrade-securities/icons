@@ -6,18 +6,21 @@ filters.forEach((button) => {
     filters.forEach((filter) => filter.setAttribute("aria-pressed", String(filter === button)));
     const category = button.dataset.filter;
     cards.forEach((card) => { card.hidden = category !== "all" && card.dataset.category !== category; });
-    count.textContent = cards.filter((card) => !card.hidden).length + " 款 / SVG + PNG";
+    count.textContent = cards.filter((card) => !card.hidden).length + (category === "original" ? " 款 / PNG" : " 款 / SVG · PNG");
   });
 });
 const dialog = document.querySelector("dialog");
 document.querySelectorAll(".preview").forEach((button) => {
   button.addEventListener("click", () => {
-    const { name, path } = button.dataset;
+    const { name, path, format = "svg" } = button.dataset;
     document.querySelector("#preview-title").textContent = name;
     const image = document.querySelector("#preview-image");
-    image.src = path + ".svg";
+    image.src = path + "." + format;
     image.alt = name + " CyberTrade Logo";
-    document.querySelector("#preview-svg").href = path + ".svg";
+    const svgLink = document.querySelector("#preview-svg");
+    svgLink.hidden = format !== "svg";
+    if (format === "svg") svgLink.href = path + ".svg";
+    else svgLink.removeAttribute("href");
     document.querySelector("#preview-png").href = path + ".png";
     dialog.showModal();
   });
