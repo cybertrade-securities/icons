@@ -1,14 +1,21 @@
 const cards = [...document.querySelectorAll(".card")];
 const filters = [...document.querySelectorAll("[data-filter]")];
 const count = document.querySelector("#count");
+let category = "all";
+function renderCount() {
+  const visible = cards.filter((card) => !card.hidden).length;
+  count.textContent = i18n.t(category === "original" ? "countPng" : "countSvgPng", visible);
+}
 filters.forEach((button) => {
   button.addEventListener("click", () => {
     filters.forEach((filter) => filter.setAttribute("aria-pressed", String(filter === button)));
-    const category = button.dataset.filter;
+    category = button.dataset.filter;
     cards.forEach((card) => { card.hidden = category !== "all" && card.dataset.category !== category; });
-    count.textContent = cards.filter((card) => !card.hidden).length + (category === "original" ? " 款 / PNG" : " 款 / SVG · PNG");
+    renderCount();
   });
 });
+document.addEventListener("i18n:change", renderCount);
+renderCount();
 const dialog = document.querySelector("dialog");
 document.querySelectorAll(".preview").forEach((button) => {
   button.addEventListener("click", () => {

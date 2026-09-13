@@ -2,6 +2,18 @@
   const button = document.querySelector("#download-bundle");
   const status = document.querySelector("#bundle-status");
   const encoder = new TextEncoder();
+  // Kept as a key and its arguments so a language change can re-render it.
+  let statusMessage = null;
+
+  function setStatus(key, ...args) {
+    statusMessage = { key, args };
+    status.textContent = i18n.t(key, ...args);
+  }
+
+  document.addEventListener("i18n:change", () => {
+    if (statusMessage) setStatus(statusMessage.key, ...statusMessage.args);
+  });
+
   const crcTable = Uint32Array.from({ length: 256 }, (_, value) => {
     for (let bit = 0; bit < 8; bit++) value = value & 1 ? 0xedb88320 ^ (value >>> 1) : value >>> 1;
     return value >>> 0;
@@ -72,7 +84,7 @@
       "assets/gradient/palettes.csv"
     ])];
     const files = [];
-    status.textContent = "正在打包：0 / " + paths.length;
+    setStatus("bundleProgress", 0, paths.length);
     try {
       for (let i = 0; i < paths.length; i += 4) {
         const batch = await Promise.all(paths.slice(i, i + 4).map(async (path) => {
@@ -81,7 +93,7 @@
           return { path, bytes: new Uint8Array(await response.arrayBuffer()) };
         }));
         files.push(...batch);
-        status.textContent = "正在打包：" + files.length + " / " + paths.length;
+        setStatus("bundleProgress", files.length, paths.length);
       }
       const url = URL.createObjectURL(zip(files));
       const link = document.createElement("a");
@@ -91,9 +103,9 @@
       link.click();
       link.remove();
       setTimeout(() => URL.revokeObjectURL(url), 30000);
-      status.textContent = "已打包 " + files.length + " 个文件，下载已开始。";
+      setStatus("bundleDone", files.length);
     } catch {
-      status.textContent = "部分文件下载失败，请检查网络后重试。";
+      setStatus("bundleFailed");
     } finally {
       button.disabled = false;
     }

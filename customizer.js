@@ -7,6 +7,14 @@
   let wordmark = "";
   let currentSvg = "";
   let exporting = false;
+  // The status line is re-rendered when the language changes, so it keeps the key
+  // rather than the text.
+  let statusKey = "customLoading";
+
+  function setStatus(key) {
+    statusKey = key;
+    status.textContent = i18n.t(key);
+  }
 
   function fill(id) {
     const mode = document.querySelector("#" + id + "-mode").value;
@@ -70,7 +78,7 @@
     if (!currentSvg || exporting) return;
     exporting = true;
     pngButton.disabled = true;
-    status.textContent = "正在导出 PNG…";
+    setStatus("customExporting");
     try {
       const image = new Image();
       image.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(currentSvg);
@@ -83,9 +91,9 @@
       const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
       if (!blob) throw new Error("PNG export failed");
       download(blob, "cybertrade-custom.png");
-      status.textContent = "PNG 已导出 · 1024 × 1024";
+      setStatus("customExported");
     } catch {
-      status.textContent = "PNG 导出失败，请重试或下载 SVG。";
+      setStatus("customExportFailed");
     } finally {
       exporting = false;
       pngButton.disabled = false;
@@ -103,10 +111,12 @@
       wordmark = new XMLSerializer().serializeToString(group);
       update();
       svgButton.disabled = pngButton.disabled = false;
-      status.textContent = "实时预览 · SVG 可无损缩放 · PNG 为 1024 × 1024";
+      setStatus("customReady");
     } catch {
-      status.textContent = "原版 Logo 加载失败，请刷新页面重试。";
+      setStatus("customLoadFailed");
     }
   }
+  document.addEventListener("i18n:change", () => setStatus(statusKey));
+  setStatus(statusKey);
   initialize();
 })();

@@ -10,7 +10,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid #78edde; outline-offs
 .brand { display: inline-flex; align-items: center; letter-spacing: 1.7px; }
 .brand img { display: block; width: 164px; height: 48px; filter: invert(1); }
 .brand span { font-size: 10px; color: #8994a8; margin-left: 12px; font-weight: 400; }
-.topbar > a:last-child { color: #a5b0c2; }
+.topbar-actions { display: flex; align-items: center; gap: 22px; }
+.topbar-actions > a { color: #a5b0c2; }
+.lang-switch { display: inline-flex; gap: 2px; padding: 3px; border: 1px solid #2c3848; border-radius: 6px; }
+.lang-switch button { min-width: 44px; padding: 6px 10px; border: 0; border-radius: 4px; background: transparent; color: #8994a8; font-size: 12px; line-height: 1.2; }
+.lang-switch button:hover { color: #edf2fa; }
+.lang-switch button[aria-pressed="true"] { background: #202b3a; color: #fff; }
+.lang-switch button:focus-visible { outline-offset: 2px; }
 .intro { display: grid; grid-template-columns: 1fr 440px; gap: 70px; align-items: center; padding-block: 46px 76px; }
 .eyebrow { font: 11px ui-monospace, monospace; letter-spacing: 2px; color: #8b9bb1; }
 h1 { font-size: clamp(42px, 4.4vw, 68px); letter-spacing: -2px; line-height: 1.24; margin: 28px 0 22px; font-weight: 650; }
@@ -57,7 +63,8 @@ dialog::backdrop { background: #03060ddd; }
 .dialog-links { display: flex; gap: 30px; padding-top: 18px; font-size: 13px; }
 @media (min-width: 1500px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (max-width: 1000px) { .topbar, main, footer { padding-inline: 32px; } .intro { grid-template-columns: 1fr 340px; gap: 30px; } .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 640px) { .topbar, main, footer { padding-inline: 20px; } .topbar { height: 72px; } .brand span { display: none; } .intro { grid-template-columns: 1fr; gap: 36px; padding-block: 22px 40px; } h1 { font-size: 44px; } .hero-art { max-width: 440px; width: 100%; justify-self: center; } .grid { grid-template-columns: 1fr; gap: 30px; } .toolbar { flex-wrap: wrap; gap: 4px; padding-block: 20px; } .filters button { padding: 10px 13px; } #count { font-size: 10px; } footer { flex-direction: column; margin-top: 44px; } }
+@media (max-width: 640px) { .topbar, main, footer { padding-inline: 20px; } .topbar { height: 72px; } .brand span { display: none; } .intro { grid-template-columns: 1fr; gap: 36px; padding-block: 22px 40px; } h1 { font-size: 44px; } .hero-art { max-width: 440px; width: 100%; justify-self: center; } .grid { grid-template-columns: 1fr; gap: 30px; } .toolbar { flex-wrap: wrap; gap: 4px; padding-block: 20px; } .filters button { padding: 10px 13px; } #count { font-size: 10px; } footer { flex-direction: column; margin-top: 44px; } .topbar-actions { gap: 14px; } }
+@media (max-width: 380px) { .brand img { width: 112px; height: auto; } .topbar-actions { gap: 10px; } .lang-switch button { min-width: 38px; padding-inline: 8px; } }
 @media (prefers-reduced-motion: reduce) { .preview img { transition: none; } }
 .custom-jump { display: inline-block; color: #8bdfec; font-size: 13px; padding-block: 12px; }
 .customizer { border-top: 1px solid #283548; margin-top: 64px; padding-top: 36px; scroll-margin-top: 24px; }
